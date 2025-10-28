@@ -19,13 +19,10 @@ public class Project {
         costPerAddress.put(new Address("Россия", "Иркутск"), 15);
         costPerAddress.put(new Address("Россия", "Москва"), 15);
         costPerAddress.put(new Address("США", "Нью-Йорк"), 15);
-
         while (true) {
             Address inputAddress = new Address();
-
             int inputWeight;
             boolean flag = false;
-
             System.out.println("Заполнение нового заказа");
             System.out.print("Введите страну: ");
             input = scanner.nextLine();
@@ -45,17 +42,12 @@ public class Project {
                 break;
             }
             inputWeight = Integer.parseInt(input);
-            for (Map.Entry<Address, Integer> kv : costPerAddress.entrySet()) {
-                if (kv.getKey().equals(inputAddress)) {
-                    flag = true;
-                    int value = inputWeight * kv.getValue();
-                    uniqueCountries.add(inputAddress.country);
-                    valueCounter += value;
-                    System.out.println("Стоимость доставки составит :" + value);
-                    break;
-                } else {
-                    flag = false;
-                }
+            if (costPerAddress.containsKey(inputAddress)) {
+                flag = true;
+                int value = inputWeight * costPerAddress.get(inputAddress);
+                uniqueCountries.add(inputAddress.country);
+                valueCounter += value;
+                System.out.println("Стоимость доставки составит :" + value);
             }
             if (flag) {
                 System.out.println("Общая стоимость всех доставок: " + valueCounter);
